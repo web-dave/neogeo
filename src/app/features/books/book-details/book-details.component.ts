@@ -12,31 +12,30 @@ import { switchMap, switchMapTo } from 'rxjs/operators';
 })
 export class BookDetailsComponent implements OnInit {
   book: IBook;
+  hurz = 136;
   private i = 0;
   private isbns: string[] = [
     '978-0-20163-361-0',
     '978-3-86490-120-1',
     '978-1-59327-584-6'
   ];
+  yeah$;
   pfui: Subscription[] = [];
   constructor(
     private route: ActivatedRoute,
     private service: BookService,
     private router: Router
   ) {
-    setInterval(() => console.log(this.pfui.length), 1000);
+    // setInterval(() => (this.hurz = 136), 1000);
   }
 
   ngOnInit() {
-    this.pfui.push(
-      this.route.params
-        .pipe(
-          switchMap((params: { isbn: string }) =>
-            this.service.getBook(params.isbn)
-          )
-        )
-        .subscribe(b => (this.book = b))
+    // this.pfui.push(
+    this.yeah$ = this.route.params.pipe(
+      switchMap((params: { isbn: string }) => this.service.getBook(params.isbn))
     );
+    // .subscribe(b => (this.book = b))
+    // );
     // this.pfui.push(
     //   this.route.params.subscribe((params: { isbn: string }) =>
     //     this.pfui.push(
@@ -53,5 +52,10 @@ export class BookDetailsComponent implements OnInit {
     this.router.navigate(['..', this.isbns[this.i]], {
       relativeTo: this.route
     });
+  }
+
+  transform(value: number, prefix = 'S.'): string {
+    console.log('component', prefix + ': ' + value);
+    return prefix + ': ' + value;
   }
 }

@@ -1,14 +1,17 @@
 <h4>Book Details!</h4>
+<!-- <pre>{{ book | json }}</pre> -->
 <a [routerLink]="['..']" class="btn btn-primary">Back</a>
 <button (click)="setParam()" class="btn btn-danger right">Next Book</button>
-<div class="panel panel-default" *ngIf="book">
+<div class="panel panel-default" *ngIf="yeah$ | async as book">
   <div class="panel-heading">{{ book.title }} ({{ book.isbn }})</div>
-  <div class="panel-body">
+  <div class="panel-body" appOrderBtn="Moin!!!">
     <p>
       {{ book.abstract }}
-      <span class="badge">Seitenzahl: {{ book.numPages }}</span>
+      <span class="badge">{{ book.numPages | page }}</span>
     </p>
     <p>{{ book.publisher.name }} ({{ book.publisher.url }})</p>
   </div>
   <div class="panel-footer">{{ book.author }}</div>
 </div>
+<!-- {{ hurz | page }}
+{{ transform(hurz) }} -->
