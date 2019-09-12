@@ -1,4 +1,12 @@
 <h5>Book List!</h5>
 <ul *ngIf="books">
-  <li *ngFor="let book of books">{{ book.title }}</li>
+  <!-- {{
+    books.length
+  }} -->
+  <!-- <li *ngFor="let book of books">{{ book.title }}</li> -->
+  <app-book-preview
+    *ngFor="let book of books"
+    [book]="book"
+    (bookSelected)="getThisBook($event)"
+  ></app-book-preview>
 </ul>
