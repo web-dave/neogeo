@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../services/book.service';
 import { IBook } from '../services/Ibook';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable } from 'rxjs';
 import { switchMap, switchMapTo } from 'rxjs/operators';
 
 @Component({
@@ -19,7 +19,7 @@ export class BookDetailsComponent implements OnInit {
     '978-3-86490-120-1',
     '978-1-59327-584-6'
   ];
-  yeah$;
+  yeah$: Observable<IBook>;
   pfui: Subscription[] = [];
   constructor(
     private route: ActivatedRoute,
