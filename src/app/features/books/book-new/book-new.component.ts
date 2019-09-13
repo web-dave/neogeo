@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { BookService } from '../services/book.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { isbnValidator } from 'src/app/shared/validators/isbn.validator';
 
 @Component({
   selector: 'app-book-new',
@@ -38,7 +39,7 @@ export class BookNewComponent implements OnInit {
     this.form = this.builder.group({
       title: ['', [Validators.required]],
       subtitle: ['', []],
-      isbn: ['', []],
+      isbn: ['', [isbnValidator]],
       abstract: ['', []],
       numPages: [0, []],
       author: ['', []],

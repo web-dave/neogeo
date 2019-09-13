@@ -26,13 +26,13 @@
       id="title"
       formControlName="title"
     />
-    <div [hidden]="!form.get('title').hasError('required')">
-      Enter a title
-    </div>
   </div>
   <div class="form-group">
     <label for="isbn">ISBN</label>
     <input class="form-control" type="text" id="isbn" formControlName="isbn" />
+    <div [hidden]="!form.get('isbn').hasError('isbn')">
+      isbn not valid
+    </div>
   </div>
   <fieldset formGroupName="publisher">
     <div class="form-group">
