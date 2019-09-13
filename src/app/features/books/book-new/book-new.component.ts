@@ -63,10 +63,33 @@ export class BookNewComponent implements OnInit {
   }
 
   save() {
-    this.service
-      .createBook(this.form.value)
-      .subscribe(b =>
-        this.router.navigate([b.isbn], { relativeTo: this.route })
-      );
+    this.service.createBook(this.form.value).subscribe(b => {
+      // this.saved = true;
+      this.form.markAsPristine();
+      this.router.navigate(['..', b.isbn], { relativeTo: this.route });
+    });
+  }
+
+  isObjectEmpty() {
+    const emptyBook = JSON.stringify({
+      title: '',
+      subtitle: '',
+      isbn: '',
+      abstract: '',
+      numPages: 0,
+      author: '',
+      publisher: {
+        name: '',
+        url: ''
+      }
+    });
+    const formValues = JSON.stringify(this.form.value);
+    console.log(emptyBook, formValues, emptyBook == formValues);
+    return emptyBook == formValues;
+  }
+
+  isSaved(): boolean {
+    console.log('Moin');
+    return this.form.pristine || this.isObjectEmpty();
   }
 }
