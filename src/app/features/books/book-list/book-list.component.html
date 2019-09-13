@@ -1,4 +1,5 @@
 <h5>Book List!</h5>
+<a [routerLink]="['new']" class="btn btn-primary">New Book</a>
 <ul *ngIf="books">
   <app-book-preview
     *ngFor="let book of books"

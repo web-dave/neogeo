@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { BookPreviewComponent } from './book-preview/book-preview.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
+import { BookNewComponent } from './book-new/book-new.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BookEditComponent } from './book-edit/book-edit.component';
     BookListComponent,
     BookPreviewComponent,
     BookDetailsComponent,
-    BookEditComponent
+    BookEditComponent,
+    BookNewComponent
   ],
   imports: [
     CommonModule,

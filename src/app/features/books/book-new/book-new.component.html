@@ -1,0 +1,53 @@
+<h3>Book New!</h3>
+<pre>{{ dynForm.value | json }}</pre>
+<a [routerLink]="['..']" class="btn btn-primary">X</a>
+<button (click)="addControl(dynForm, 'Hurz')">Add Key 'KEY'</button>
+<form [formGroup]="dynForm" (ngSubmit)="save()">
+  <div class="form-group" *ngFor="let itm of dynKeys">
+    <label [for]="itm">{{ itm }}</label>
+    <input
+      class="form-control"
+      type="text"
+      [id]="itm"
+      [formControlName]="itm"
+    />
+    <div [hidden]="!dynForm.get(itm).hasError('required')">
+      Enter a {{ itm }}
+    </div>
+  </div>
+</form>
+<hr />
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      class="form-control"
+      type="text"
+      id="title"
+      formControlName="title"
+    />
+    <div [hidden]="!form.get('title').hasError('required')">
+      Enter a title
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="isbn">ISBN</label>
+    <input class="form-control" type="text" id="isbn" formControlName="isbn" />
+  </div>
+  <fieldset formGroupName="publisher">
+    <div class="form-group">
+      <label>Name:</label>
+      <input class="form-control" type="text" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <label>Url:</label>
+      <input class="form-control" type="text" formControlName="url" />
+    </div>
+  </fieldset>
+
+  <div [hidden]="!form.get('isbn').hasError('minlength')">
+    Not a valid ISBN
+  </div>
+
+  <button type="submit" [disabled]="!form.valid">Save</button>
+</form>

@@ -38,4 +38,7 @@ export class BookService {
   setBook(book: IBook): Observable<IBook> {
     return this.http.put<IBook>(`${this.root}/${book.isbn}`, book);
   }
+  createBook(book: IBook): Observable<IBook> {
+    return this.http.post<IBook>(this.root, book);
+  }
 }
