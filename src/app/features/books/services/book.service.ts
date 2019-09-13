@@ -33,11 +33,9 @@ export class BookService {
   }
 
   getBook(isbn: string): Observable<IBook> {
-    console.log('Hurbelwonz');
     return this.http.get<IBook>(`${this.root}/${isbn}`);
   }
   setBook(book: IBook): Observable<IBook> {
-    console.log('Hurbelwonz');
     return this.http.put<IBook>(`${this.root}/${book.isbn}`, book);
   }
 }
