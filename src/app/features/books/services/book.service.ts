@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
 import { IBook } from './Ibook';
+import { StoreClass } from 'src/app/shared/redux/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
   root = 'http://localhost:4730/books';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: StoreClass) {}
 
   getBooks_Foo(): Observable<IBook[]> {
     return this.http.get<IBook[]>(this.root).pipe(
@@ -27,13 +28,21 @@ export class BookService {
       })
     );
   }
+  loadBooks(): void {
+    this.http
+      .get<IBook[]>(this.root)
+      .subscribe(bl => this.store.setBookState(bl));
+  }
 
   getBooks(): Observable<IBook[]> {
-    return this.http.get<IBook[]>(this.root);
+    return this.store.getStoreObservable().pipe(map(bs => bs.booklist));
   }
 
   getBook(isbn: string): Observable<IBook> {
-    return this.http.get<IBook>(`${this.root}/${isbn}`);
+    return this.store.getStoreObservable().pipe(
+      map(bs => bs.booklist),
+      map(bl => bl.find(b => b.isbn === isbn))
+    );
   }
   setBook(book: IBook): Observable<IBook> {
     return this.http.put<IBook>(`${this.root}/${book.isbn}`, book);
