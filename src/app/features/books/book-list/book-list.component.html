@@ -2,7 +2,7 @@
 <a [routerLink]="['new']" class="btn btn-primary">New Book</a>
 <ul *ngIf="books">
   <app-book-preview
-    *ngFor="let book of books"
+    *ngFor="let book of books; let i = index"
     [book]="book"
     (bookSelected)="getThisBook($event)"
   ></app-book-preview>
