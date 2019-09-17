@@ -19,6 +19,19 @@ describe('workspace-project App', () => {
     // browser.takeScreenshot().then(i => )
     browser.sleep(3000);
   });
+  it('should drag&drop', () => {
+    page.navigateTo();
+    const btn = page.findElement('.btn.btn-primary');
+    const ul = page.findElement('ul');
+    browser
+      .actions()
+      .dragAndDrop(btn, ul)
+      .mouseUp()
+      .perform();
+    // expect(page.getUrl()).toContain('978-1-59327-584-6');
+    // browser.takeScreenshot().then(i => )
+    browser.sleep(3000);
+  });
   it('should navigate to book New', () => {
     page.navigateTo('/books/new');
     page.findElement('input').sendKeys('ölidfhasöoifh');
