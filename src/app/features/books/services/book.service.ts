@@ -9,7 +9,7 @@ import {
   getBookEntities
 } from '../redux/book.store';
 import { Store } from '@ngrx/store';
-import { LoadBooks, UpdateBook } from '../redux/book.actions';
+import { LoadBooks, UpdateBook, CreateBook } from '../redux/book.actions';
 import { Update } from '@ngrx/entity';
 
 @Injectable({
@@ -35,13 +35,16 @@ export class BookService {
   }
   setBook(book: IBook) {
     this.store.dispatch(new UpdateBook(book));
+    this.store.dispatch(new UpdateBook(book));
     return of(null);
   }
   setBookOnBackend(book: IBook) {
     this.http.put<IBook>(`${this.root}/${book.isbn}`, book).subscribe();
   }
   createBook(book: IBook): Observable<IBook> {
-    return this.http.post<IBook>(this.root, book);
+    return this.http
+      .post<IBook>(this.root, book)
+      .pipe(tap(b => this.store.dispatch(new CreateBook(b))));
   }
 
   getBooks_Foo(): Observable<IBook[]> {
