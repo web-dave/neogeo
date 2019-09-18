@@ -13,9 +13,7 @@ import { bookfeaturename, IBookState, getBooks } from '../redux/book.store';
 })
 export class BookListComponent implements OnInit {
   books$: Observable<IBook[]>;
-  books: IBook[];
   constructor(
-    private service: BookService,
     private store: Store<IBookState>,
     private router: Router,
     private route: ActivatedRoute
@@ -23,7 +21,6 @@ export class BookListComponent implements OnInit {
 
   ngOnInit() {
     this.books$ = this.store.select(getBooks);
-    // this.service.getBooks().subscribe(b => (this.books = b));
   }
 
   getThisBook(b: IBook) {

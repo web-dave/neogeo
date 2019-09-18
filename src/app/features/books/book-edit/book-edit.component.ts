@@ -30,6 +30,8 @@ export class BookEditComponent implements OnInit {
   saveBook() {
     this.service
       .setBook(this.book)
-      .subscribe(b => this.router.navigate(['..'], { relativeTo: this.route }));
+      .subscribe(() =>
+        this.router.navigate(['..'], { relativeTo: this.route })
+      );
   }
 }

@@ -8,6 +8,7 @@ import { AboutModule } from './features/about/about.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     SharedModule,
     HttpClientModule,
     StoreModule.forRoot({}),
-    StoreDevtoolsModule.instrument({ maxAge: 100 })
+    StoreDevtoolsModule.instrument({ maxAge: 100 }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

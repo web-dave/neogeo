@@ -13,6 +13,8 @@ import { BookNewComponent } from './book-new/book-new.component';
 import { StoreModule } from '@ngrx/store';
 import { bookfeaturename } from './redux/book.store';
 import { booksReducer } from './redux/book.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './redux/book.effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { booksReducer } from './redux/book.reducer';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(bookfeaturename, booksReducer)
+    StoreModule.forFeature(bookfeaturename, booksReducer),
+    EffectsModule.forFeature([BookEffects])
   ],
   providers: []
 })
