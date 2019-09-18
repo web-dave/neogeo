@@ -10,6 +10,9 @@ import { BookPreviewComponent } from './book-preview/book-preview.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookNewComponent } from './book-new/book-new.component';
+import { StoreModule } from '@ngrx/store';
+import { bookfeaturename } from './redux/book.store';
+import { booksReducer } from './redux/book.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { BookNewComponent } from './book-new/book-new.component';
     BooksRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature(bookfeaturename, booksReducer)
   ],
   providers: []
 })

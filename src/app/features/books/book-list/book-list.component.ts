@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book.service';
 import { IBook } from '../services/Ibook';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { bookfeaturename, IBookState, getBooks } from '../redux/book.store';
 
 @Component({
   selector: 'app-book-list',
@@ -9,15 +12,18 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
+  books$: Observable<IBook[]>;
   books: IBook[];
   constructor(
     private service: BookService,
+    private store: Store<IBookState>,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.service.getBooks().subscribe(b => (this.books = b));
+    this.books$ = this.store.select(getBooks);
+    // this.service.getBooks().subscribe(b => (this.books = b));
   }
 
   getThisBook(b: IBook) {

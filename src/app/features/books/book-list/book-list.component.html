@@ -1,8 +1,8 @@
 <h5>Book List!</h5>
 <a [routerLink]="['new']" class="btn btn-primary">New Book</a>
-<ul *ngIf="books">
+<ul *ngIf="books$ | async as books">
   <app-book-preview
-    *ngFor="let book of books; let i = index"
+    *ngFor="let book of books"
     [book]="book"
     (bookSelected)="getThisBook($event)"
   ></app-book-preview>
